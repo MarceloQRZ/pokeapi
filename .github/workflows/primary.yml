@@ -1,0 +1,23 @@
+name: build for test
+
+on:
+  push:
+    branches:
+      - master
+
+  jobs:
+    ci:
+      name: build test
+      runs-on: ubuntu-latest
+
+      permissions:
+        contents: read
+        packages: write
+
+      outputs:
+        image: ${{ steps.image.outputs.image }}
+        sha_short: ${{ steps.image.outputs.sha_short }}
+
+      steps:
+        - name: checkout pipeline
+          uses: actions/checkout
