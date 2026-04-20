@@ -20,4 +20,4 @@ jobs:
 
     steps:
       - name: checkout pipeline
-        uses: actions/checkout
+        uses: actions/checkout@v4
