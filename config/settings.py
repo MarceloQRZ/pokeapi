@@ -55,22 +55,15 @@ ROOT_URLCONF = "config.urls"
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "pokeapi_co_db",
-#         "USER": "root",
-#         "PASSWORD": "pokeapi",
-#         "HOST": "localhost",
-#         "PORT": "",
-#         "CONN_MAX_AGE": 30,
-#     }
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "pokeapi_co_db",
+        "USER": "root",
+        "PASSWORD": "pokeapi",
+        "HOST": "localhost",
+        "PORT": "",
+        "CONN_MAX_AGE": 30,
     }
 }
 
