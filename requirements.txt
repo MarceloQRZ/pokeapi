@@ -8,3 +8,4 @@ gunicorn==23.0.0
 psycopg[binary]==3.3.2
 drf-spectacular==0.29.0
 legacy-cgi; python_version >= '3.13'
+gunicorn 
