@@ -58,6 +58,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
+print("DATABASE_URL:", os.getenv("DATABASE_URL"))
+
+if not DATABASE_URL:
+    raise Exception("DATABASE_URL não definida.")
+
 if (DATABASE_URL):
     url = urlparse(DATABASE_URL)
 
