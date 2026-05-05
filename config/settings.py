@@ -1,6 +1,7 @@
 # Production settings
 import os
 from pathlib import Path
+from urllib.parse import urlparse
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -55,17 +56,37 @@ ROOT_URLCONF = "config.urls"
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "pokeapi_co_db",
-#         "USER": "root",
-#         "PASSWORD": "pokeapi",
-#         "HOST": "localhost",
-#         "PORT": "",
-#         "CONN_MAX_AGE": 30,
-#     }
-# }
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if (DATABASE_URL):
+    url = urlparse(DATABASE_URL)
+
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": url.path[1:],  # remove a /
+            "USER": url.username,
+            "PASSWORD": url.password,
+            "HOST": url.hostname,
+            "PORT": url.port or "5432",
+            "CONN_MAX_AGE": 600,
+            "OPTIONS": {
+                "sslmode": "require",
+            },
+        }
+    }
+else:
+    # fallback local (docker)
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "pokeapi_co_db",
+            "USER": "root",
+            "PASSWORD": "pokeapi",
+            "HOST": "localhost",
+            "PORT": "5432",
+        }
+}
 
 DATABASES = {
     'default': {
